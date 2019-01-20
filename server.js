@@ -100,8 +100,6 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
         success: function(data, accept) {
           console.log(moment().toISOString() + " - [SocketIO] username: " + data.user.username + " connected and authenticated - session ID: " + data.sessionID);
           accept(null, true);
-          console.log(moment().toISOString() + " - [SocketIO] username: " + data.user.username + " has subscribed to events - session ID: " + data.sessionID);
-          socketEvents.subscribe(socket, webex);
         },
         fail: function(data, message, error, accept) {
           console.log(moment().toISOString() + " - [SocketIO] Socket connection authentication failed: " + message);
@@ -110,7 +108,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
         store: store
       }));
 
-      io.on("test", function(socket) {
+      io.on("connection", function(socket) {
         console.log(moment().toISOString() + " - [SocketIO] username: " + data.user.username + " has subscribed to events - session ID: " + data.sessionID);
         socketEvents.subscribe(socket, webex);
       });
