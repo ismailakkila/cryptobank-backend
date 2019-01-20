@@ -73,7 +73,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
         cookieParser: cookieParser,
         key: "express.sid",
         secret: process.env.SHARED_SECRET,
-        resave: true,
+        resave: false,
         saveUninitialized: true,
         store: store,
         cookie: {
