@@ -6,9 +6,9 @@ var remoteParticipants = [
     agentId: 1
   },
   {
-    displayName: "Firas Alrazouq",
+    displayName: "John Doe",
     available: false,
-    email: "falrazouq@cisco.com",
+    email: "jdoe@cisco.com",
     agentId: 2
   }
 ];
