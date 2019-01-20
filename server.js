@@ -71,6 +71,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
       app.use(express.static(indexPath));
       app.use(session({
         cookieParser: cookieParser,
+        key: "express.sid",
         secret: process.env.SHARED_SECRET,
         resave: true,
         saveUninitialized: true,
@@ -90,6 +91,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
 
       io.use(passportSocketIo.authorize({
         cookieParser: cookieParser,
+        key: "express.sid",
         secret: process.env.SHARED_SECRET,
         success: function(data, accept) {
           console.log(moment().toISOString() + " - [SocketIO] username: " + data.user.username + " connected and authenticated - session ID: " + data.sessionID);
