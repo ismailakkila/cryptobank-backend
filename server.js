@@ -68,7 +68,6 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
         origin: process.env.FRONTENDURL,
         credentials: true
       }));
-      //app.options('*', cors());
       app.use(session({
         cookieParser: cookieParser,
         secret: process.env.SHARED_SECRET,
@@ -88,6 +87,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
       app.use(express.static(indexPath));
 
       app.use(function(req, res, next) {
+        console.log(res.headers);
         console.log(moment().toISOString() + " - [Node Express] " + req.method + " - " + req.path + " - " + req.ip);
         return next();
       });
