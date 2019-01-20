@@ -114,6 +114,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
           socketEvents.subscribe(socket, webex);
         }
         else {
+          console.log(moment().toISOString() + " - [SocketIO] Force disconnected!");
           socket.disconnect();
         }
       });
