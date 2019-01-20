@@ -77,6 +77,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
         saveUninitialized: true,
         store: store,
         cookie: {
+          domain: 'crypto-backend.herokuapp.com',
           httpOnly: true,
           secure: true,
           maxAge: Date.now() + (30 * 86400 * 1000)
