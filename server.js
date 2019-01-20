@@ -64,8 +64,6 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
       console.log(moment().toISOString() + " - [Node Express] Successfully started server on TCP: " + port);
 
       app.use(helmet());
-      app.use(cors());
-      app.options('*', cors());
       app.use(bodyParser.urlencoded({extended: false}));
       app.use(cookieParser());
       app.use(express.static(indexPath));
@@ -79,6 +77,8 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
       }));
       app.use(passport.initialize());
       app.use(passport.session());
+      app.use(cors());
+      app.options('*', cors());
       app.use(function(req, res, next) {
         console.log(moment().toISOString() + " - [Node Express] " + req.method + " - " + req.path + " - " + req.ip);
         return next();
