@@ -109,7 +109,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
       }));
 
       io.on("connection", function(socket) {
-        console.log(moment().toISOString() + " - [SocketIO] username: " + data.user.username + " has subscribed to events - session ID: " + data.sessionID);
+        console.log(moment().toISOString() + " - [SocketIO] username: " + socket.user.username + " has subscribed to events - session ID: " + socket.sessionID);
         socketEvents.subscribe(socket, webex);
       });
 
