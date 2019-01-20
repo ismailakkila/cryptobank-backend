@@ -63,7 +63,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
       }
       console.log(moment().toISOString() + " - [Node Express] Successfully started server on TCP: " + port);
 
-      app.use(helmet());
+      //app.use(helmet());
       app.use(cors({
         origin: process.env.FRONTENDURL,
         credentials: true
