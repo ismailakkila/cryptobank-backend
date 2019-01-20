@@ -95,6 +95,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
         secret: process.env.SHARED_SECRET,
         success: function(data, accept) {
           console.log(moment().toISOString() + " - [SocketIO] username: " + data.user.username + " connected and authenticated - session ID: " + data.sessionID);
+          data.emit("authorised");
           accept(null, true);
         },
         fail: function(data, message, error, accept) {
@@ -104,7 +105,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
         store: store
       }));
 
-      io.on("connection", function(socket) {
+      io.on("authorised", function(socket) {
         socketEvents.subscribe(socket, webex);
       });
 
