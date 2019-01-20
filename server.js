@@ -75,7 +75,11 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
         resave: true,
         saveUninitialized: true,
         store: store,
-        maxAge: Date.now() + (30 * 86400 * 1000)
+        cookie: {
+          httpOnly: false,
+          secure: true,
+          maxAge: Date.now() + (30 * 86400 * 1000)
+        }
       }));
       app.use(passport.initialize());
       app.use(passport.session());
