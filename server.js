@@ -75,9 +75,10 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
         resave: true,
         saveUninitialized: true,
         store: store,
+        proxy: true,
         cookie: {
           httpOnly: true,
-          secure: false,
+          secure: true,
           maxAge: Date.now() + (30 * 86400 * 1000),
         }
       }));
@@ -88,7 +89,6 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
       app.use(express.static(indexPath));
 
       app.use(function(req, res, next) {
-        console.log(res.get("Set-Cookie"));
         console.log(moment().toISOString() + " - [Node Express] " + req.method + " - " + req.path + " - " + req.ip);
         return next();
       });
