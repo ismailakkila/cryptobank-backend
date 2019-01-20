@@ -77,7 +77,8 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
         cookie: {
           httpOnly: true,
           secure: true,
-          maxAge: Date.now() + (30 * 86400 * 1000)
+          maxAge: Date.now() + (30 * 86400 * 1000),
+          domain: process.env.FRONTENDURL.split("://")[1] || null
         }
       }));
       app.use(passport.initialize());
@@ -87,7 +88,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
       app.use(express.static(indexPath));
 
       app.use(function(req, res, next) {
-        console.log(res.headers);
+        console.log(res.get("Set-Cookie"));
         console.log(moment().toISOString() + " - [Node Express] " + req.method + " - " + req.path + " - " + req.ip);
         return next();
       });
