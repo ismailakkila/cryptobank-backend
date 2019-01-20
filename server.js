@@ -27,8 +27,6 @@ var indexPath = __dirname + "/public";
 var databaseCollections = ["users"];
 
 var app = express();
-app.use(cors());
-app.options('*', cors());
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var MongoStore = require("connect-mongo")(session);
@@ -66,6 +64,9 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
       console.log(moment().toISOString() + " - [Node Express] Successfully started server on TCP: " + port);
 
       app.use(helmet());
+      app.use(cors());
+      app.options('*', cors());
+      app.use(passport.initialize());
       app.use(bodyParser.urlencoded({extended: false}));
       app.use(cookieParser());
       app.use(express.static(indexPath));
@@ -77,7 +78,6 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
         store: store,
         maxAge: Date.now() + (30 * 86400 * 1000)
       }));
-      app.use(passport.initialize());
       app.use(passport.session());
       app.use(function(req, res, next) {
         console.log(moment().toISOString() + " - [Node Express] " + req.method + " - " + req.path + " - " + req.ip);
