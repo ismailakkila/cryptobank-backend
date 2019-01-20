@@ -66,7 +66,6 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
       app.use(helmet());
       app.use(cors());
       app.options('*', cors());
-      app.use(passport.initialize());
       app.use(bodyParser.urlencoded({extended: false}));
       app.use(cookieParser());
       app.use(express.static(indexPath));
@@ -78,6 +77,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
         store: store,
         maxAge: Date.now() + (30 * 86400 * 1000)
       }));
+      app.use(passport.initialize());
       app.use(passport.session());
       app.use(function(req, res, next) {
         console.log(moment().toISOString() + " - [Node Express] " + req.method + " - " + req.path + " - " + req.ip);

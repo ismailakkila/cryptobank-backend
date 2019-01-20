@@ -4,7 +4,6 @@ var remoteParticipants = require("./remoteParticipants");
 
 var subscribe = function(socket, webex) {
   socket.on("disconnect", function() {
-    console.log(socket.request.user);
     console.log(moment().toISOString() + " - [SocketIO] username: " + socket.request.user.username + " disconnected - session ID: " + socket.request.sessionID);
   });
 
