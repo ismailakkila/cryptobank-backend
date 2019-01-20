@@ -71,14 +71,14 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
       app.use(cookieParser());
       app.use(session({
         cookieParser: cookieParser,
+        name: "connect.sid",
         secret: process.env.SHARED_SECRET,
         resave: true,
         saveUninitialized: true,
         store: store,
-        proxy: true,
         cookie: {
           httpOnly: true,
-          secure: true,
+          secure: false,
           maxAge: Date.now() + (30 * 86400 * 1000),
         }
       }));
