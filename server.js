@@ -8,6 +8,7 @@ var moment = require("moment");
 var helmet = require("helmet");
 var cookieParser = require("cookie-parser");
 var passportSocketIo = require("passport.socketio");
+var cors = require("cors");
 
 var auth = require("./auth");
 var routes = require("./routes");
@@ -63,6 +64,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
       console.log(moment().toISOString() + " - [Node Express] Successfully started server on TCP: " + port);
 
       app.use(helmet());
+      app.options('*', cors());
       app.use(bodyParser.urlencoded({extended: false}));
       app.use(cookieParser());
       app.use(express.static(indexPath));
