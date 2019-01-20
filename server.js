@@ -63,11 +63,12 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
       }
       console.log(moment().toISOString() + " - [Node Express] Successfully started server on TCP: " + port);
 
-      //app.use(helmet());
+      app.use(helmet());
       app.use(cors({
         origin: process.env.FRONTENDURL,
         credentials: true
       }));
+      app.use(cookieParser());
       app.use(session({
         cookieParser: cookieParser,
         secret: process.env.SHARED_SECRET,
@@ -78,12 +79,11 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
           httpOnly: true,
           secure: true,
           maxAge: Date.now() + (30 * 86400 * 1000),
-          domain: process.env.FRONTENDURL.split("://")[1] || null
         }
       }));
       app.use(passport.initialize());
       app.use(passport.session());
-      app.use(cookieParser());
+
       app.use(bodyParser.urlencoded({extended: false}));
       app.use(express.static(indexPath));
 
