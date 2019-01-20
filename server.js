@@ -72,9 +72,9 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
       app.use(bodyParser.urlencoded({extended: false}));
       app.use(cookieParser());
       app.use(express.static(indexPath));
+      
       app.use(session({
         cookieParser: cookieParser,
-        name: "connect.sid",
         secret: process.env.SHARED_SECRET,
         resave: true,
         saveUninitialized: true,
