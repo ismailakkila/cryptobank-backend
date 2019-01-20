@@ -64,7 +64,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
       console.log(moment().toISOString() + " - [Node Express] Successfully started server on TCP: " + port);
 
       app.use(helmet());
-      app.use(cors());
+      app.use(cors({credentials: true}));
       app.options('*', cors());
       app.use(bodyParser.urlencoded({extended: false}));
       app.use(cookieParser());
@@ -77,7 +77,6 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
         saveUninitialized: true,
         store: store,
         cookie: {
-          domain: 'crypto-backend.herokuapp.com',
           httpOnly: true,
           secure: true,
           maxAge: Date.now() + (30 * 86400 * 1000)
