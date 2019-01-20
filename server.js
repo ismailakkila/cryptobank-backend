@@ -68,7 +68,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
         origin: process.env.FRONTENDURL,
         credentials: true
       }));
-      app.options('*', cors());
+      //app.options('*', cors());
       app.use(session({
         cookieParser: cookieParser,
         secret: process.env.SHARED_SECRET,
