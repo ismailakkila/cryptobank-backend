@@ -77,7 +77,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
         saveUninitialized: true,
         store: store,
         cookie: {
-          httpOnly: false,
+          httpOnly: true,
           secure: true,
           maxAge: Date.now() + (30 * 86400 * 1000)
         }
