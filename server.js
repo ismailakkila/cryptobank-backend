@@ -110,8 +110,10 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
 
       io.on("connection", function(socket) {
         if (socket.request.sessionID && socket.request.user) {
-          console.log(moment().toISOString() + " - [SocketIO] username: " + socket.request.user.username + " has subscribed to events - session ID: " + socket.request.sessionID);
-          socketEvents.subscribe(socket, webex);
+          if (socket.request.user.username) {
+            console.log(moment().toISOString() + " - [SocketIO] username: " + socket.request.user.username + " has subscribed to events - session ID: " + socket.request.sessionID);
+            socketEvents.subscribe(socket, webex);
+          }
         }
         else {
           console.log(moment().toISOString() + " - [SocketIO] Force disconnected!");
