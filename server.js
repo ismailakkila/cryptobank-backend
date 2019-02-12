@@ -55,7 +55,7 @@ mongodb.MongoClient.connect(process.env.DATABASEURI, {useNewUrlParser: true})
       return;
     });
 
-    server.listen(port, function(err) {
+    server.listen(port, "0.0.0.0", function(err) {
       if (err) {
         console.log(moment().toISOString() + " - [Node Express] Failed to start server on TCP: " + port);
         console.log(moment().toISOString() + " - [Node Express] Error: " + err);

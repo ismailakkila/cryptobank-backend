@@ -13,7 +13,7 @@ module.exports = function(io) {
     socket.emit("SubAdd", {subs: subscriptions});
     socket.on("m", function(message) {
       var priceInfo = message.split("~");
-      if (priceInfo[0] === "2" && priceInfo[priceInfo.length - 1] === "ce9") {
+      if (priceInfo[0] === "2") {
         var cryptoTicker = priceInfo[2];
         var cryptoPrice = priceInfo[3] + " " + priceInfo[5];
         pricePairs = pricePairs.filter(function(pricePair) {
